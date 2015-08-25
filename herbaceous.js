@@ -16,7 +16,7 @@ HB.test = function(pattern, obj) {
       return true
 
     if(Array.isArray(pattern))
-      return true // lalalalalala
+      return HB.all(pattern)(obj)
 
     if(typeof pattern === 'object')
       return Object.keys(pattern).every(function(key) {return test(pattern[key], obj[key])})
@@ -25,6 +25,13 @@ HB.test = function(pattern, obj) {
       return pattern(obj)
 
     return pattern === obj
+  }
+}
 
+HB.all = function(pattern) {
+  return function(obj) {
+    if(Array.isArray(pattern))
+      return Array.isArray(obj) && pattern.every(function(val) {return ~obj.indexOf(val)})
+    return Object.keys(pattern).every(function(val) { return typeof obj[val] != 'undefined'})
   }
 }

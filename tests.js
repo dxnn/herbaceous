@@ -61,24 +61,44 @@ describe('Integration Tests for the Basic API', function() {
     })
   })
 
-  // describe('{prop: "*"} should match anything that has that property', function() {
+  describe('[1,2,3] should match any array with values 1, 2, and 3', function() {
 
-  //   it('{prop: "*"} should match {prop: 123}', function() {
-  //     return HB.test('{prop: "*"}', {prop: 123}).should.be.true
-  //   })
+    it('[1,2,3] should match [1,2,3]', function() {
+      return HB.test([1,2,3], [1,2,3]).should.be.true
+    })
 
-  //   it('{prop: "*"} should match {prop: {porp: 123}}', function() {
-  //     return HB.test('{prop: "*"}', {prop: {porp: 123}}).should.be.true
-  //   })
+    it('[1,2,3] should not match [1,2,4]', function() {
+      return HB.test([1,2,3], [1,2,4]).should.be.false
+    })
 
-  //   it('{prop: "*"} should match {prop: 123, porp: 123}', function() {
-  //     return HB.test('{prop: "*"}', {prop: 123, porp: 123}).should.be.true
-  //   })
+    it('[1,2,3] should match [1,2,4,3]', function() {
+      return HB.test([1,2,3], [1,2,4,3]).should.be.true
+    })
 
-  //   it('{prop: "*"} should not match {nop: 123}', function() {
-  //     return HB.test('{prop: "*"}', {nop: 123}).should.be.true
-  //   })
-  // })
+    it('[1,2,3] should not match [1,2]', function() {
+      return HB.test([1,2,3], [1,2]).should.be.false
+    })
+
+    it('[1] should not match 1', function() {
+      return HB.test([1], 1).should.be.false
+    })
+
+    it('[1] should not match {x:1}', function() {
+      return HB.test([1], {x:1}).should.be.false
+    })
+
+    it('[1] should not match "1"', function() {
+      return HB.test([1], "1").should.be.false
+    })
+
+    it('[1] should not match false', function() {
+      return HB.test([1], false).should.be.false
+    })
+
+    it('[1] should not match null', function() {
+      return HB.test([1], null).should.be.false
+    })
+  })
 
 
   // describe('{prop: "*"} should match anything that has that property', function() {
