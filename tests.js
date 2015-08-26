@@ -146,50 +146,56 @@ describe('Integration Tests for the Basic API', function() {
   })
 
 
+  describe('HB.any should match related things', function() {
 
+    it('HB.any([1,2,3]) should match [1]', function() {
+      return HB.test(HB.any([1,2,3]), [1]).should.be.true
+    })
 
+    it('HB.any([1,2,3]) should match [1,2]', function() {
+      return HB.test(HB.any([1,2,3]), [1,2]).should.be.true
+    })
 
+    it('HB.any([1,2,3]) should match [1,4]', function() {
+      return HB.test(HB.any([1,2,3]), [1,4]).should.be.true
+    })
 
+    it('HB.any([1,2,3]) should match [3,4,5]', function() {
+      return HB.test(HB.any([1,2,3]), [3,4,5]).should.be.true
+    })
 
-  // describe('Add an anonymous mode private message', function() {
-  //   var prom
+    it('HB.any([1,2,3]) should not match [4,5,6]]', function() {
+      return HB.test(HB.any([1,2,3]), [4,5,6]).should.be.true
+    })
 
-  //   it('should add an anonymous private message', function(done) {
-  //     var userprom = EB.Users.addAnonymousUser()
-  //     userprom.then(function(userRecord) {
-  //       recipient = userRecord.username
-  //       prom = EB.postAnonymousPrivateMessage('Hello World', recipient)
-  //     }).then(done)
-  //   })
+    it('HB.any([1,2,3]) should not match []]', function() {
+      return HB.test(HB.any([1,2,3]), []).should.be.true
+    })
 
-  //   it('should have some content', function() {
-  //     return prom.should.eventually.have.deep.property('payload.content')
-  //   })
+    it('HB.any({car: 123, truck: *, porch: {x: 1, y: 2}}) should match {car:123}', function() {
+      return HB.test(HB.any({car: 123, truck: '*', porch: {x: 1, y: 2}}), {car:123}).should.be.true
+    })
 
-  //   it('should have type encryptedpuff', function() {
-  //     return prom.should.eventually.have.deep.property('payload.type', 'encryptedpuff')
-  //   })
+    it('HB.any({car: 123, truck: *, porch: {x: 1, y: 2}}) should match {car:123}', function() {
+      return HB.test(HB.any({car: 123, truck: '*', porch: {x: 1, y: 2}}), {car:123}).should.be.true
+    })
 
-  //   it('should have recipient as a key', function() {
-  //     return prom.should.eventually.have.property('keys').and.property(recipient + ':1') // THINK: hardcoded capa
-  //   })
+    it('HB.any({car: 123, truck: *, porch: {x: 1, y: 2}}) should match {car:123}', function() {
+      return HB.test(HB.any({car: 123, truck: '*', porch: {x: 1, y: 2}}), {car:123}).should.be.true
+    })
 
-  //   it('should not have our username as a key', function() {
-  //     return prom.should.eventually.have.property('keys').and.not.property(username + ':1') // THINK: hardcoded capa
-  //   })
+    it('HB.any({car: 123, truck: *, porch: {x: 1, y: 2}}) should match {car:123}', function() {
+      return HB.test(HB.any({car: 123, truck: '*', porch: {x: 1, y: 2}}), {car:123}).should.be.true
+    })
 
-  //   it('should not be from our username', function() {
-  //     return prom.should.eventually.have.property('username').and.not.contain(username)
-  //   })
+    it('HB.any({car: 123, truck: *, porch: {x: 1, y: 2}}) should match {car:123}', function() {
+      return HB.test(HB.any({car: 123, truck: '*', porch: {x: 1, y: 2}}), {car:123}).should.be.true
+    })
 
-  //   it('should not have our username in the routes', function() {
-  //     return prom.should.eventually.have.property('routes').and.not.contain(username)
-  //   })
+    it('HB.any({car: 123, truck: *, porch: {x: 1, y: 2}}) should match {car:123}', function() {
+      return HB.test(HB.any({car: 123, truck: '*', porch: {x: 1, y: 2}}), {car:123}).should.be.true
+    })
+  })
 
-  //   it.skip('should have our username as the letter', function() {
-  //     // return prom.should.eventually.have.property('routes').and.not.contain(username)
-  //   })
-
-  // })
 
 })

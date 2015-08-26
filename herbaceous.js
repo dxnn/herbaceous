@@ -36,6 +36,14 @@ HB.all = function(pattern) {
   }
 }
 
+HB.any = function(pattern) {
+  return function(obj) {
+    if(Array.isArray(pattern))
+      return Array.isArray(obj) && pattern.some(function(val) {return ~obj.indexOf(val)})
+    return Object.keys(pattern).some(function(val) { return typeof obj[val] != 'undefined'})
+  }
+}
+
 HB.length = function(number) {
   return function(obj) {
     return obj.length >= number
