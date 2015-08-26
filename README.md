@@ -13,11 +13,12 @@ Now that the disclaimers are out of the way, here's how it works:
 HB.test({animal: 'unicorn'}, {asdf: 'blargh'})
 ```
 
-That tests to false, like you would probably expect.
+That test returns false, like you would probably expect.
 
 ```
 HB.test({animal: '*'}, {animal: 'drummer'})
 ```
 
-That tests to true, which you may not have expected.
+That test returns true, which you may not have expected.
 
+See the 'tests.js' file for more surprising stories of pattern matching fun.
