@@ -4,6 +4,25 @@ var should = chai.should()
 describe('Integration Tests for the Basic API', function() {
   // this.timeout(7000)
 
+  describe('anything should match itself', function() {
+
+    it('1 should match 1', function() {
+      return HB.test(1, 1).should.be.true
+    })
+
+    it('"lala" should match "lala"', function() {
+      return HB.test("lala", "lala").should.be.true
+    })
+
+    it('{foo: 123} should match {foo: 123}', function() {
+      return HB.test({foo: 123}, {foo: 123}).should.be.true
+    })
+
+    it('[1,2,3] should match [1,2,3]', function() {
+      return HB.test([1,2,3], [1,2,3]).should.be.true
+    })
+  })
+
   describe('* should match anything', function() {
 
     it('* should match an object', function() {
@@ -101,24 +120,30 @@ describe('Integration Tests for the Basic API', function() {
   })
 
 
-  // describe('{prop: "*"} should match anything that has that property', function() {
+  describe('HB.length should match arrays by length', function() {
 
-  //   it('{prop: "*"} should match {prop: 123}', function() {
-  //     return HB.test('{prop: "*"}', {prop: 123}).should.be.true
-  //   })
+    it('HB.length(3) should match any array with a length of three or more', function() {
+      var result = HB.test({prop: HB.length(3)}, {prop: [1,2,3]}).should.be.true
+                && HB.test({prop: HB.length(3)}, {prop: [1,2,3,4]}).should.be.true
+                && HB.test({prop: HB.length(3)}, {prop: [1,2]}).should.be.false
+      return result
+    })
 
-  //   it('{prop: "*"} should match {prop: {porp: 123}}', function() {
-  //     return HB.test('{prop: "*"}', {prop: {porp: 123}}).should.be.true
-  //   })
+    it('HB.length.exactly(3) should match any array with a length of exactly three', function() {
+      var result = HB.test({prop: HB.length.exactly(3)}, {prop: [1,2,3]}).should.be.true
+                && HB.test({prop: HB.length.exactly(3)}, {prop: [1,2,3,4]}).should.be.false
+                && HB.test({prop: HB.length.exactly(3)}, {prop: [1,2]}).should.be.false
+      return result
+    })
 
-  //   it('{prop: "*"} should match {prop: 123, porp: 123}', function() {
-  //     return HB.test('{prop: "*"}', {prop: 123, porp: 123}).should.be.true
-  //   })
-
-  //   it('{prop: "*"} should not match {nop: 123}', function() {
-  //     return HB.test('{prop: "*"}', {nop: 123}).should.be.true
-  //   })
-  // })
+    it('HB.length.less_than(3) should match any array with a length of less than three', function() {
+      var result = HB.test({prop: HB.length.less_than(3)}, {prop: [1,2,3]}).should.be.false
+                && HB.test({prop: HB.length.less_than(3)}, {prop: [1,2,3,4]}).should.be.false
+                && HB.test({prop: HB.length.less_than(3)}, {prop: [1,2]}).should.be.true
+                && HB.test({prop: HB.length.less_than(3)}, {prop: [1]}).should.be.true
+      return result
+    })
+  })
 
 
 

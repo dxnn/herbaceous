@@ -35,3 +35,21 @@ HB.all = function(pattern) {
     return Object.keys(pattern).every(function(val) { return typeof obj[val] != 'undefined'})
   }
 }
+
+HB.length = function(number) {
+  return function(obj) {
+    return obj.length >= number
+  }
+}
+
+HB.length.exactly = function(number) {
+  return function(obj) {
+    return obj.length === number
+  }
+}
+
+HB.length.less_than = function(number) {
+  return function(obj) {
+    return obj.length < number
+  }
+}
